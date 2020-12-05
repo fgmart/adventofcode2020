@@ -4,6 +4,7 @@
 ; Day 2 of Advent of Code 2020
 ; Dec 4 2020
 ; part one answer so far
+; part two done now too
 
 (define in (open-input-file "day2-input.txt"))
 
@@ -24,7 +25,8 @@
 (define (read-and-process count)
   (let ((str (read-line in)))
     (if (eof-object? str) count
-        (if (process-line str) (read-and-process (+ 1 count))
+        ; change to "process-iine" for first problem
+        (if (process-line2 str) (read-and-process (+ 1 count))
             (read-and-process count)))))
 
 ; parses a line into four parts and returns them as a list:
@@ -50,7 +52,18 @@
          (pwd (fourth quad))
          (numchars (count-chars pwd char)))
     (and (>= numchars min) (<= numchars max))))
-    
+
+; part 2 answer
+(define (process-line2 str)
+  (let* ((quad (parse-line str))
+         (min (first quad))
+         (max (second quad))
+         (char (third quad))
+         (pwd (fourth quad))
+         (match (lambda (c) (eq? c char))))
+    (xor (match (string-ref pwd (- min 1)))
+         (match (string-ref pwd (- max 1))))))
+         
 
 ; surely there must be a better way?
 ; counts occurrances of char in str by
