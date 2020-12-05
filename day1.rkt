@@ -18,7 +18,7 @@
   (if (null? lst) #f
       (let ((candidate (first lst)))
         (begin
-         ; (display (lis(test2 (first mynums) (second mynums) (rest (rest mynums)))t base num candidate))(display "\n")
+;          (display (list base num candidate))(display "\n")
           (if (sum2020? base num candidate) candidate
               (findit base num (rest lst)))))))
 
