@@ -2,7 +2,7 @@
 
 ; Fred Martin fredm@alum.mit.edu
 ; Day 2 of Advent of Code 2020
-; Dec 5 2020
+; Dec 4 2020
 ; part one answer so far
 
 (define in (open-input-file "day2-input.txt"))
