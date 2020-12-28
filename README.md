@@ -49,5 +49,44 @@ I was going to move on to my next language -- Julia -- and now I see Day 6 and m
 
 So staying in Prolog for one more day.
 
+## Day 7, Part 1: Prolog.
+
+Indeed, this problem of determining which bags may hold a given bag is tailor-made for Prolog.
+
+After defining all the facts, the solution is had just asking Prolog for the answer-set:
+
+    setof(X, contains(X, 'shiny gold'), Z),
+
+meaning, find all things `X` that may contain the `shiny gold` bag, and then give me the set of unique ones in a list `Z`.
+
+It took me a while to get here. 
+
+First I was defining the facts as a bag holding a list of bags. I had a predicate that would test if the list matched (e.g., contained one bright white and two muted yellows).
+
+Then I thought of just having the list in alphabetical order, and had rules like this:
+
+    contains(light_red, [bright_white, muted_yellow, muted_yellow]).
+
+My breakthrough was re-reading a Prolog "family relations" tutorial for the nth time ([this one](http://www.learnprolognow.org/lpnpage.php?pagetype=html&pageid=lpn-htmlse49)). Then I realized that it should just be a series of rules, like this:
+
+    holds(light_red, bright_white). 
+    holds(light_red, muted_yellow).
+
+and I could use the `setof` predicate above to get the answer.
+
+(I deliberately ignored the counts, since these don't matter for Part 1.)
+
+The final step was figuring out how to define facts at runtime, with a combination of this directive in the source file:
+
+    :- dynamic holds/2.
+    
+and using the `assertz` predicate to define facts.
+
+After that it was just work to write the code to parse the input :)
+
+And, I discovered that in the Prolog REPL, after you assert a fact, it stays around until you restart!
+
+    
+
 
 
